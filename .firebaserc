@@ -1,0 +1,11 @@
+{
+  "projects": {
+    "users": "users-52f24",
+    "tickets": "tickets-9b660",
+    "follow": "follow-961eb",
+    "posts": "posts-9fec7",
+    "chat": "chat-f5626",
+    "default": "creatormarket-e6b2f"
+  },
+  "targets": {}
+}

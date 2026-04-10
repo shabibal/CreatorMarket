@@ -1,0 +1,27 @@
+services:
+  - type: node
+    name: createmarket-api
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: "18"
+      - key: PORT
+        value: "10000"
+      - key: STRIPE_SECRET_KEY
+        value: sk_test_51TKcn8Q1mS0ypodBVcDEViWlAkj1gaElMUYZz4rky96eLib9Sh3vZPax81FBjoUxp8ZM0PVFtLaBXgsprMrwZ3Kv00fEIhqje0
+      - key: STRIPE_WEBHOOK_SECRET
+        value: whsec_your_webhook_secret
+      - key: PAYPAL_CLIENT_ID
+        value: ARJjSzbXEKwJnB86Yf3WS8WSRqipIA3nGv0rFgTbVmg9lkAJGMNKazJSneT_1CFRREBdMWjmMlDsMtH9
+      - key: PAYPAL_SECRET
+        value: EAVljo3MuMAa4AdbP8g0TY77Cjv9qlhwm-5bQG2EqdcnXOU974zLDFdaU891X8-AszAaHiCg5Gqiav8z
+      - key: PAYPAL_MODE
+        value: sandbox
+      - key: PLATFORM_FEE_PERCENT
+        value: "10"
+      - key: FRONTEND_URL
+        value: https://creatormarket-e6b2f.web.app
+
+freePort: true

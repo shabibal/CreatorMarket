@@ -1,0 +1,71 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function isAdmin() {
+      return request.auth != null && 
+        request.auth.token.admin == true;
+    }
+    
+    // Profile images - owner can upload, public read
+    match /profiles/{userId}/{fileName} {
+      allow read: if true;
+      allow write: if isOwner(userId);
+      allow delete: if isOwner(userId);
+    }
+    
+    // Service images - authenticated users can upload, public read
+    match /services/{serviceId}/{fileName} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+      allow delete: if isAuthenticated();
+    }
+    
+    // Project files - authenticated users can upload, public read
+    match /projects/{projectId}/{fileName} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+      allow delete: if isAuthenticated();
+    }
+    
+    // Chat files - participants only
+    match /chat/{conversationId}/{fileName} {
+      allow read, write: if isAuthenticated();
+      allow delete: if isAuthenticated();
+    }
+    
+    // Portfolio files - owner can upload, public read
+    match /portfolio/{userId}/{fileName} {
+      allow read: if true;
+      allow write: if isOwner(userId);
+      allow delete: if isOwner(userId);
+    }
+    
+    // Order attachments - participants only
+    match /orders/{orderId}/{fileName} {
+      allow read, write: if isAuthenticated();
+      allow delete: if isAuthenticated();
+    }
+    
+    // Ticket attachments - owner and admin only
+    match /tickets/{ticketId}/{fileName} {
+      allow read, write: if isAuthenticated();
+      allow delete: if isAuthenticated();
+    }
+    
+    // Default - deny all
+    match /{allPaths=**} {
+      allow read: if false;
+      allow write: if false;
+      allow delete: if false;
+    }
+  }
+}
