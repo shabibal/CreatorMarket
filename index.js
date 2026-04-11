@@ -470,17 +470,10 @@ app.get('/api/verify-stripe-session/:sessionId', async (req, res) => {
 // HEALTH CHECK
 // ============================================
 
-app.get('/api/health', (req, res) => {
-  res.json({ 
-    status: 'ok', 
-    timestamp: new Date().toISOString(),
-    paymentMethods: {
-      paypal: 'subscriptions',
-      stripe: 'card',
-'paypal'
-    }
-  })
-})
+apayment_method_types: [
+  'card',
+  'paypal'   // paypal مدعوم!
+],
 
 const PORT = process.env.PORT || 10000
 
