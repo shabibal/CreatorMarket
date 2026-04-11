@@ -476,7 +476,8 @@ app.get('/api/health', (req, res) => {
     timestamp: new Date().toISOString(),
     paymentMethods: {
       paypal: 'subscriptions',
-      stripe: ['card', 'apple_pay', 'google_pay']
+      stripe: 'card',
+'paypal'
     }
   })
 })
